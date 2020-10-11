@@ -1,3 +1,4 @@
+
 const { pipe, flatMap } = require('../util/utils.js')
 const { beginning_of_day, beginning_of_hour, hours_after, next_24_hours, hours_in_latest_week } = require('../util/dates.js')
 
@@ -47,6 +48,7 @@ const generate_historic_times = date => hours_in_latest_week(beginning_of_day(da
 const generate_historic_events = pipe(generate_historic_times, flatMap(time => places.map(place => model.event(time, place))))
 const generate_historic_data = pipe(generate_historic_events, flatMap(generate_data))
 
+
 const generate_future_times = date => next_24_hours(hours_after(beginning_of_hour(date))(1))
 const generate_future_events = pipe(generate_future_times, flatMap(time => places.map(place => model.event(time, place))))
 const generate_forecast = pipe(generate_future_events, flatMap(generate_predictions))
@@ -71,3 +73,4 @@ const regenerate_forecast = forecast => pipe(generate_future_events, flatMap( ev
 }))
 
 module.exports = { generate_historic_data, generate_forecast, regenerate_forecast, alertable }
+
