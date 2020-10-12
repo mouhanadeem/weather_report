@@ -1,53 +1,50 @@
 <html>
-  <head>
-      <title>Weather</title>
-      <style>
-          td {
-              width: 40px;
-              height: 40px;
-              border: 1px solid black;
-          }
-          table {
-              border: 1px solid black;
-              border-spacing: 0;
-          }
-      </style>
-      
-      <script type = 'module' >
-        
-         import generate from '../model/generate.js'
+<head> 
+    <title>Weather</title>
+    <style>
+        td {
+            width: 40px;
+            height: 40px;
+            border: 1px solid black;
+        }
+        table {
+            border: 1px solid black;
+            border-spacing: 0;
+        }
+    </style>
+    <script type = 'module'>
+        // import presenter from './presenter.js'
          import view from './view.js'
-          
-          
-          window.init = function() {
-              const request = new XMLHttpRequest()
-              request.open('GET', 'http://localhost:8080/data')
-              request.send()
-              request.onload = () => {
-                  const data = JSON.parse(request.responseText)
-               
-                      const theModel =generate(data)
-                      const theView = view(window)
-              
-                      theView.update(theModel)
-                  }
-              }
-            
-      </script>
-  </head>
-
-
-
-
-  
-    <body onload="init()">
-      <div id='base'>
-          <h1>Weather</h1>
-          <table id='weather'>
-              <thead><tr><td>value</td><td>type</td><td>unit</td><td>time</td><td>place</td></tr></thead>
-              <tbody id='weather_data'></tbody>
-          </table>
-      </div>
- 
-  </body>
+         import data from "./data.js"
+        
+        window.init = function() {
+            const request = new XMLHttpRequest()
+            request.open('GET', 'http://localhost:8080/data')
+            request.responseType = 'json';
+            request.send()
+            request.onload = () => {
+                const persons = request.response
+                console.log(persons)
+                // request.open('GET', 'http://localhost:9090/employees')
+                // request.send()
+                // request.onload = () => {
+                //     const employees = JSON.parse(request.responseText)
+                 const theModel = data(persons)
+                 const theView = view(window)
+                // const thePresenter = presenter(theModel, theView)
+                // theView.listen(thePresenter.onAction)
+                theView.update(theModel)
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+    <div id='base'>
+        <h1>People</h1>
+        <table id='employees'>
+            <thead><tr><td>value</td><td>type</td><td>unit</td><td>time</td><td>place</td></tr></thead>
+            <tbody id='employee_data'></tbody>
+        </table>
+    </div>
+</body>
 </html>
