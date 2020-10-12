@@ -1,9 +1,6 @@
 export default window => {
     const document = window.document
-    const table_body = document.getElementById('employee_data')
-    const listeners = []
-
-    const listen = l => listeners.push(l)
+    const table_body = document.getElementById('weather_data')
 
     const addData = p => {
         const tr = table_body.appendChild(document.createElement('tr'))
@@ -15,10 +12,8 @@ export default window => {
     }
 
     const update = data => {
-        // while(table_body.firstChild) table_body.removeChild(table_body.firstChild)
-        data.addData().forEach(addData)
+        data.weatherData().forEach(addData)
     }
-    // const prompt = window.prompt.bind(window)
 
-    return { addData, update, listen, prompt }
+    return { addData, update }
 }

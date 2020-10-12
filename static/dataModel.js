@@ -1,4 +1,4 @@
-const model = 
+const dataModel = 
 (
     datas, 
     // employees, 
@@ -7,7 +7,7 @@ const model =
     // const employeeMap = {}
     // employees.forEach(e => employeeMap[e.employeeId] = e)
 
-    const addData = () => datas.map(d => ({...d})).filter(filter)
+    const weatherData = () => datas.map(w => ({...w})).filter(filter)
 
     const updateData = p => model(datas.map(pp => p.id == pp.id? p : pp), filter)
     // const addEmployee = e => model(persons, employees.concat(e), filter)
@@ -20,7 +20,7 @@ const model =
         // , employees
         )
 
-    return { addData, updateData, filtered, all }
+    return { weatherData, updateData, filtered, all }
 }
 
-export default model
+export default dataModel
